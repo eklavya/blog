@@ -10,6 +10,6 @@ I am an experienced engineering leader with expertise in building scalable, dist
 
 # Contact
 
-<a href="mailto:saurabh.rawat@example.com">Email</a>
+<a href="mailto:saurabh.rawat90@gmail.com">Email</a>
 
 <a href="https://www.linkedin.com/in/rawatsaurabh/" target="_blank">LinkedIn</a>
