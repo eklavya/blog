@@ -1,12 +1,13 @@
 name: Your Blog
 tagline: Things you talk about
-url: https://YOURUSER.github.io/blog
+url: https://eklavya.github.io/blog
 menu:
   - ["About", "about.html"]
   - ["Pages", "pages.html"]
   - ["Tags", "tags.html"]
-  - ["Follow me", "https://mastodon.social/@YOURUSER"]
-  - ["Github", "https://github.com/rochacbruno/marmite"]
+  - ["Email", "mailto:saurabh.rawat90@gmail.com"]
+  - ["Github", "https://github.com/eklavya"]
+  - ["LinkedIn", "https://www.linkedin.com/in/rawatsaurabh/"]
 
 
 # More options available to customize the website
