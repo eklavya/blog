@@ -1,5 +1,5 @@
 # About Me
-I am an experienced engineering leader with expertise in building scalable, distributed systems. I have bootstrapped teams from hiring, coaching to delivering complex projects quickly. I have mentored and developed engineers to achieve greatness in their work and career. I am experienced in a variety of domains including Cloud Infrastructure, Speech Recognition and Processing, IoT, finance and banking. My primary interest is in developing highly scalable distributed systems.
+I am an experienced engineering leader with expertise in building scalable, distributed systems. I have bootstrapped teams from hiring, coaching to delivering complex projects quickly. I have mentored and developed engineers to achieve greatness in their work and career.
 
 # Experience
 * Google: Engineering Manager (Oct 2022, Present)
