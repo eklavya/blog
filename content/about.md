@@ -7,3 +7,9 @@ I am an experienced engineering leader with expertise in building scalable, dist
 * Voicezen: Principal Engineer (Aug 2018, Sept 2019)
 * Pramati: Principal Engineer (Aug 2013, Jul 2018)
 * Ericsson: Software Engineer (Jun 2011, Jul 2013)
+
+# Contact
+
+<a href="mailto:saurabh.rawat@example.com">Email</a>
+
+<a href="https://www.linkedin.com/in/rawatsaurabh/" target="_blank">LinkedIn</a>

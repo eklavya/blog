@@ -3,11 +3,7 @@ tagline: Saurabh Rawat's blog, likely helpful.
 url: https://eklavya.github.io/blog
 menu:
   - ["About", "about.html"]
-  - ["Pages", "pages.html"]
   - ["Tags", "tags.html"]
-  - ["Email", "mailto:saurabh.rawat90@gmail.com"]
-  - ["Github", "https://github.com/eklavya"]
-  - ["LinkedIn", "https://www.linkedin.com/in/rawatsaurabh/"]
 
 pagination: 10
 
