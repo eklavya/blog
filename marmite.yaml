@@ -9,6 +9,10 @@ menu:
   - ["Github", "https://github.com/eklavya"]
   - ["LinkedIn", "https://www.linkedin.com/in/rawatsaurabh/"]
 
+pagination: 10
+
+extra:
+  colorscheme: clean
 
 # More options available to customize the website
 # read on https://rochacbruno.github.io/marmite/tag/customization.html
