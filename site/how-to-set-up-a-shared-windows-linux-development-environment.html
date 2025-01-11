@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="How to Set Up a Shared Windows/Linux Development Environment">
+
+<meta property="og:description" content="I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 y...">
+
+<meta property="og:image" content="https://eklavya.github.io/blog/media/disk_management_tool.png">
+
+
+<meta property="og:url" content="https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Saurabh Rawat">
+
+<meta property="article:published_time" content=" 2025-01-10T00:00:00+00:00">
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html"
+    },
+    "url": "https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html",
+    "headline": "How to Set Up a Shared Windows/Linux Development Environment",
+    "description": "I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 years, except for compiling and running a...",
+    "image": "https://eklavya.github.io/blog/media/disk_management_tool.png",
+    
+    "publisher": {
+        "@type": "Organization",
+        "name": "Saurabh Rawat",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://eklavya.github.io/blog/"
+        }
+    },
+    "datePublished": "2025-01-10T00:00:00+00:00"
+}
+</script>
+
+
+    <title>How to Set Up a Shared Windows/Linux Development Environment | Saurabh Rawat</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/colorschemes/clean.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Setup" href="tag-setup.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Windows" href="tag-windows.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Linux" href="tag-linux.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Saurabh Rawat</a></h2>
+                             <p>Saurabh Rawat's blog, likely helpful.</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./about.html">About</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>How to Set Up a Shared Windows/Linux Development Environment</h1> 
+    
+
+
+<span class="content-date">
+    <small> Jan 10, 2025 - &#10710; 3 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><p>I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 years, except for compiling and running apps here and there. It's not bad after you run a <a href="https://github.com/Raphire/Win11Debloat">debloater</a>.</p>
+<p>Ok, so now I dual boot with Ubuntu 24.04 LTS. I remote into it from my macbook for development. I also develop on Windows when I am using the PC (which is most of the time these days).</p>
+<p>There is a problem now, I am not disciplined enough to always have all the repos checked in, all the time. If I start doing something on the mac and later on want to continue it on the PC, I need to setup a shared workspace. Thankfully, WSL2 can mount linux drives, including btrfs!</p>
+<h2><a href="#setting-up-a-shared-workspace" aria-hidden="true" class="anchor" id="setting-up-a-shared-workspace"></a>Setting up a Shared Workspace</h2>
+<h3><a href="#mark-the-disk-offline" aria-hidden="true" class="anchor" id="mark-the-disk-offline"></a>Mark the disk offline</h3>
+<p>Mark the linux drive offline in the disk management tool so we can stop Windows from accessing it.</p>
+<p><figure><img src="media/disk_management_tool.png" alt="Disk Management Tool" /></figure></p>
+<p>Inside the tool, right click the disk and mark it offline.</p>
+<p><figure><img src="media/disk_offline.png" alt="Mark Offline" /></figure></p>
+<h3><a href="#attach-the-drive-at-login-in-windows" aria-hidden="true" class="anchor" id="attach-the-drive-at-login-in-windows"></a>Attach the drive at login in Windows</h3>
+<p>Figure out the disk to attach.
+Open powershell and run:</p>
+<pre><code class="language-bat"> wmic diskdrive list brief
+</code></pre>
+<p>Check the DeviceID column for the name.</p>
+<p>Search for task scheduler and open it.
+Create a new basic task. Name it something like &quot;Mount Linux Drive&quot;. Set the trigger to &quot;When I log on&quot;. Select &quot;Run with highest privileges&quot;.
+In the action, select &quot;Start a program&quot; and set the program/script to:
+<code>C:\Windows\System32\cmd.exe</code></p>
+<p>Add arguments:
+<code>/c wsl -d Ubuntu --mount \\.\PHYSICALDRIVE2 --bare</code></p>
+<p>Here replace <code>PHYSICALDRIVE2</code> with your device id and Ubuntu with your distro name.</p>
+<p><figure><img src="media/task_action.png" alt="Task Scheduler" /></figure></p>
+<h3><a href="#mount-the-linux-drive" aria-hidden="true" class="anchor" id="mount-the-linux-drive"></a>Mount the Linux Drive</h3>
+<p>Now mount the drive in WSL2. How to mount will depend on whether it's an LVM or not.</p>
+<p>If it is an LVM, you need to install <code>lvm2</code> and create a systemd service to start it at boot, for example:</p>
+<pre><code>[Unit]
+Description=Mount Ubuntu
+[Service]
+User=root
+ExecStart=/bin/bash -lc 'vgchange -ay ubuntu-vg'
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>After that you will need to mount the contents of the lvm everytime you start WSL2. I could not get systemd to do that automatically.</p>
+<pre><code class="language-sh">sudo mount /dev/ubuntu-vg/ubuntu-lv /media/ubuntu
+</code></pre>
+<p>If it's not an LVM, you can just mount the drive directly. To find the UUID of the drive, run:</p>
+<pre><code class="language-sh">lsblk -fa
+</code></pre>
+<p>Then create a systemd service:</p>
+<pre><code># /etc/systemd/system/mount-ubuntu.mount
+[Unit]
+Description=Mount Ubuntu
+
+[Mount]
+What=/dev/disk/by-uuid/your-uuid-here
+Where=/mnt/ubuntu
+Where=/media/ubuntu
+Type=auto
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>More on how to mount using systemd <a href="https://manpages.debian.org/testing/systemd/systemd.mount.5.en.html">here</a>.</p>
+<p><strong>Note:</strong> At the time of this writing WSL2 does not mount btrfs with <code>discard=async</code>. So make sure fstrim.timer is enabled and running when you boot into linux to make sure the filesystem is trimmed.</p>
+<p>More details on trimming, including for external SSDs, see <a href="https://wiki.archlinux.org/title/Solid_state_drive">here</a></p>
+<h3><a href="#all-set" aria-hidden="true" class="anchor" id="all-set"></a>All Set</h3>
+<p>Now you can start WSL2 and access your Linux drive from Windows.
+And the same workspace is available in both environments!
+I personally use VSCode for this.</p>
+<p>Happy coding!</p>
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Jan 10, 2025 - &#10710; 3 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+          <li><a href="./tag-linux.html">Linux</a></li>
+          
+          <li><a href="./tag-windows.html">Windows</a></li>
+          
+          <li><a href="./tag-setup.html">Setup</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+  
+  
+  
+  
+
+
+
+    <article><h4><a href="#comments" aria-hidden="true" class="anchor" id="comments"></a>Comments</h4>
+<script src="https://giscus.app/client.js"
+        data-repo="eklavya/blog"
+        data-repo-id="R_kgDONohHBw"
+        data-category="General"
+        data-category-id="DIC_kwDONohHB84Cl6Op"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+
+
+
+        </section>
+        
+           <p>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a></p>
+
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>
