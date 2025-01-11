@@ -62,9 +62,9 @@
 
 
     <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Setup" href="tag-setup.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Windows" href="tag-windows.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Linux" href="tag-linux.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Setup" href="tag-setup.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
     
 
@@ -82,7 +82,7 @@
                     <li>
                         <hgroup>
                             <h2><a href="./" class="contrast">Saurabh Rawat</a></h2>
-                             <p>Saurabh Rawat's blog, likely helpful.</p> 
+                             <p>Saurabh Rawat's blog, considered helpful.</p> 
                         </hgroup>
                     </li>
                 </ul>
@@ -108,9 +108,21 @@
                     
                     <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
                     
+                    <li><a href="#" id="search-toggle" class="secondary" title="Search (Ctrl + Shift + F)"> <span class="search-txt">Search</span><span class="search-magnifier"></span></a></li>
+                    
                     <div class="underline"></div>
                 </ul>
             </nav>
+            
+            <div class="marmite-background-overlay" id="overlay-close"></div>
+            <div class="marmite-search-bar hidden">
+                <span>Search Posts</span>
+                <button class="marmite-close-button" id="search-close">X</button>
+                <input placeholder="Search" id="marmite-search-input" />
+                <div class="marmite-search-bar-result">
+                    <ul id="marmite-search-bar-result"></ul>
+                </div>
+            </div>
             
         </header>
         
@@ -139,7 +151,7 @@
 
   <div class="content-html"><p>I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 years, except for compiling and running apps here and there. It's not bad after you run a <a href="https://github.com/Raphire/Win11Debloat">debloater</a>.</p>
 <p>Ok, so now I dual boot with Ubuntu 24.04 LTS. I remote into it from my macbook for development. I also develop on Windows when I am using the PC (which is most of the time these days).</p>
-<p>There is a problem now, I am not disciplined enough to always have all the repos checked in, all the time. If I start doing something on the mac and later on want to continue it on the PC, I need to setup a shared workspace. Thankfully, WSL2 can mount linux drives, including btrfs!</p>
+<p>There is a problem now, I am not disciplined enough to always have all the repos checked in, all the time. If I start doing something on the mac and later on, want to continue it on the PC, I need to setup a shared workspace. Thankfully, WSL2 can mount linux drives, including btrfs!</p>
 <h2><a href="#setting-up-a-shared-workspace" aria-hidden="true" class="anchor" id="setting-up-a-shared-workspace"></a>Setting up a Shared Workspace</h2>
 <h3><a href="#mark-the-disk-offline" aria-hidden="true" class="anchor" id="mark-the-disk-offline"></a>Mark the disk offline</h3>
 <p>Mark the linux drive offline in the disk management tool so we can stop Windows from accessing it.</p>
@@ -162,7 +174,8 @@ In the action, select &quot;Start a program&quot; and set the program/script to:
 <p><figure><img src="media/task_action.png" alt="Task Scheduler" /></figure></p>
 <h3><a href="#mount-the-linux-drive" aria-hidden="true" class="anchor" id="mount-the-linux-drive"></a>Mount the Linux Drive</h3>
 <p>Now mount the drive in WSL2. How to mount will depend on whether it's an LVM or not.</p>
-<p>If it is an LVM, you need to install <code>lvm2</code> and create a systemd service to start it at boot, for example:</p>
+<h4><a href="#if-its-an-lvm" aria-hidden="true" class="anchor" id="if-its-an-lvm"></a>If it's an LVM</h4>
+<p>You will need to install <code>lvm2</code> and create a systemd service to start it at boot, for example:</p>
 <pre><code>[Unit]
 Description=Mount Ubuntu
 [Service]
@@ -175,7 +188,8 @@ WantedBy=multi-user.target
 <p>After that you will need to mount the contents of the lvm everytime you start WSL2. I could not get systemd to do that automatically.</p>
 <pre><code class="language-sh">sudo mount /dev/ubuntu-vg/ubuntu-lv /media/ubuntu
 </code></pre>
-<p>If it's not an LVM, you can just mount the drive directly. To find the UUID of the drive, run:</p>
+<h4><a href="#if-its-not-an-lvm" aria-hidden="true" class="anchor" id="if-its-not-an-lvm"></a>If it's not an LVM</h4>
+<p>You can just mount the drive directly. To find the UUID of the drive, run:</p>
 <pre><code class="language-sh">lsblk -fa
 </code></pre>
 <p>Then create a systemd service:</p>
@@ -195,11 +209,10 @@ WantedBy=multi-user.target
 </code></pre>
 <p>More on how to mount using systemd <a href="https://manpages.debian.org/testing/systemd/systemd.mount.5.en.html">here</a>.</p>
 <p><strong>Note:</strong> At the time of this writing WSL2 does not mount btrfs with <code>discard=async</code>. So make sure fstrim.timer is enabled and running when you boot into linux to make sure the filesystem is trimmed.</p>
-<p>More details on trimming, including for external SSDs, see <a href="https://wiki.archlinux.org/title/Solid_state_drive">here</a></p>
+<p>More details on trimming, including for external SSDs, see the excellent archlinux documentation <a href="https://wiki.archlinux.org/title/Solid_state_drive">here</a>.</p>
 <h3><a href="#all-set" aria-hidden="true" class="anchor" id="all-set"></a>All Set</h3>
 <p>Now you can start WSL2 and access your Linux drive from Windows.
-And the same workspace is available in both environments!
-I personally use VSCode for this.</p>
+And the same workspace is available in both environments!</p>
 <p>Happy coding!</p>
 </div>
   
@@ -247,7 +260,8 @@ I personally use VSCode for this.</p>
 
 
 
-    <article><h4><a href="#comments" aria-hidden="true" class="anchor" id="comments"></a>Comments</h4>
+  
+      <article><h4><a href="#comments" aria-hidden="true" class="anchor" id="comments"></a>Comments</h4>
 <script src="https://giscus.app/client.js"
         data-repo="eklavya/blog"
         data-repo-id="R_kgDONohHBw"
@@ -265,7 +279,7 @@ I personally use VSCode for this.</p>
         async>
 </script>
 </article>
-
+  
 
 
         </section>
@@ -277,6 +291,8 @@ I personally use VSCode for this.</p>
 
     <script src="./static/marmite.js"></script>
     <script src="./static/custom.js"></script>
+    
+    <script type="module" src="./static/search.js"></script>
     
     
     

@@ -1,3 +1,8 @@
+---
+extra:
+    nocomments: true
+---
+
 # About Me
 I am an experienced engineering leader with expertise in building scalable, distributed systems. I have bootstrapped teams from hiring, coaching to delivering complex projects quickly. I have mentored and developed engineers to achieve success in their work and career.
 

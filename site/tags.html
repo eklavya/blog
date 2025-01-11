@@ -8,7 +8,7 @@
     <meta name="generator" content="Marmite" />
     
     <meta property="og:title" content="Saurabh Rawat">
-    <meta property="og:description" content="Saurabh Rawat's blog, likely helpful.">
+    <meta property="og:description" content="Saurabh Rawat's blog, considered helpful.">
     
     
     <meta property="og:url" content="https://eklavya.github.io/blog">
@@ -26,9 +26,9 @@
     <link rel="stylesheet" type="text/css" href="./static/custom.css">
     
     <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Setup" href="tag-setup.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Windows" href="tag-windows.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Linux" href="tag-linux.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Setup" href="tag-setup.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
     
 
@@ -46,7 +46,7 @@
                     <li>
                         <hgroup>
                             <h2><a href="./" class="contrast">Saurabh Rawat</a></h2>
-                             <p>Saurabh Rawat's blog, likely helpful.</p> 
+                             <p>Saurabh Rawat's blog, considered helpful.</p> 
                         </hgroup>
                     </li>
                 </ul>
@@ -72,9 +72,21 @@
                     
                     <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
                     
+                    <li><a href="#" id="search-toggle" class="secondary" title="Search (Ctrl + Shift + F)"> <span class="search-txt">Search</span><span class="search-magnifier"></span></a></li>
+                    
                     <div class="underline"></div>
                 </ul>
             </nav>
+            
+            <div class="marmite-background-overlay" id="overlay-close"></div>
+            <div class="marmite-search-bar hidden">
+                <span>Search Posts</span>
+                <button class="marmite-close-button" id="search-close">X</button>
+                <input placeholder="Search" id="marmite-search-input" />
+                <div class="marmite-search-bar-result">
+                    <ul id="marmite-search-bar-result"></ul>
+                </div>
+            </div>
             
         </header>
         
@@ -85,17 +97,6 @@
         </div>
         <article class="group-details">
             <details open>
-                <summary role="button" class="outline contrast tag-group-title">Setup <sup>1</sup></summary>
-                <ul>
-                
-                    <li><a href="./how-to-set-up-a-shared-windows-linux-development-environment.html">How to Set Up a Shared Windows/Linux Development Environment</a> <small>2025-01-10</small></li>
-                
-                
-                <li><a href="./tag-setup.html">more &rarr;</a></li>
-                
-                
-            </ul>
-            </details><details >
                 <summary role="button" class="outline contrast tag-group-title">Windows <sup>1</sup></summary>
                 <ul>
                 
@@ -117,6 +118,17 @@
                 
                 
             </ul>
+            </details><details >
+                <summary role="button" class="outline contrast tag-group-title">Setup <sup>1</sup></summary>
+                <ul>
+                
+                    <li><a href="./how-to-set-up-a-shared-windows-linux-development-environment.html">How to Set Up a Shared Windows/Linux Development Environment</a> <small>2025-01-10</small></li>
+                
+                
+                <li><a href="./tag-setup.html">more &rarr;</a></li>
+                
+                
+            </ul>
             </details>
         </article>
 
@@ -128,6 +140,8 @@
     </main>
     <script src="./static/marmite.js"></script>
     <script src="./static/custom.js"></script>
+    
+    <script type="module" src="./static/search.js"></script>
     
     
     

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Saurabh Rawat</title><link>https://eklavya.github.io/blog</link><description>Saurabh Rawat&apos;s blog, likely helpful.</description><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><lastBuildDate>Sat, 11 Jan 2025 04:15:51 GMT</lastBuildDate><generator>marmite</generator><item><title>How to Set Up a Shared Windows/Linux Development Environment</title><link>https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html</link><category>Linux</category><category>Windows</category><category>Setup</category><guid>https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html</guid><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><source url="https://eklavya.github.io/blog">archive-2025</source><content:encoded><![CDATA[<p>I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 years, except for compiling and running apps here and there. It's not bad after you run a <a href="https://github.com/Raphire/Win11Debloat">debloater</a>.</p>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Saurabh Rawat</title><link>https://eklavya.github.io/blog</link><description>Saurabh Rawat&apos;s blog, considered helpful.</description><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><lastBuildDate>Sat, 11 Jan 2025 07:00:47 GMT</lastBuildDate><generator>marmite</generator><item><title>How to Set Up a Shared Windows/Linux Development Environment</title><link>https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html</link><category>Linux</category><category>Windows</category><category>Setup</category><guid>https://eklavya.github.io/blog/how-to-set-up-a-shared-windows-linux-development-environment.html</guid><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><source url="https://eklavya.github.io/blog">archive-2025</source><content:encoded><![CDATA[<p>I recently setup a new gaming machine with Windows 11. I have been away from Windows for almost 15 years, except for compiling and running apps here and there. It's not bad after you run a <a href="https://github.com/Raphire/Win11Debloat">debloater</a>.</p>
 <p>Ok, so now I dual boot with Ubuntu 24.04 LTS. I remote into it from my macbook for development. I also develop on Windows when I am using the PC (which is most of the time these days).</p>
-<p>There is a problem now, I am not disciplined enough to always have all the repos checked in, all the time. If I start doing something on the mac and later on want to continue it on the PC, I need to setup a shared workspace. Thankfully, WSL2 can mount linux drives, including btrfs!</p>
+<p>There is a problem now, I am not disciplined enough to always have all the repos checked in, all the time. If I start doing something on the mac and later on, want to continue it on the PC, I need to setup a shared workspace. Thankfully, WSL2 can mount linux drives, including btrfs!</p>
 <h2><a href="#setting-up-a-shared-workspace" aria-hidden="true" class="anchor" id="setting-up-a-shared-workspace"></a>Setting up a Shared Workspace</h2>
 <h3><a href="#mark-the-disk-offline" aria-hidden="true" class="anchor" id="mark-the-disk-offline"></a>Mark the disk offline</h3>
 <p>Mark the linux drive offline in the disk management tool so we can stop Windows from accessing it.</p>
@@ -23,7 +23,8 @@ In the action, select &quot;Start a program&quot; and set the program/script to:
 <p><figure><img src="media/task_action.png" alt="Task Scheduler" /></figure></p>
 <h3><a href="#mount-the-linux-drive" aria-hidden="true" class="anchor" id="mount-the-linux-drive"></a>Mount the Linux Drive</h3>
 <p>Now mount the drive in WSL2. How to mount will depend on whether it's an LVM or not.</p>
-<p>If it is an LVM, you need to install <code>lvm2</code> and create a systemd service to start it at boot, for example:</p>
+<h4><a href="#if-its-an-lvm" aria-hidden="true" class="anchor" id="if-its-an-lvm"></a>If it's an LVM</h4>
+<p>You will need to install <code>lvm2</code> and create a systemd service to start it at boot, for example:</p>
 <pre><code>[Unit]
 Description=Mount Ubuntu
 [Service]
@@ -36,7 +37,8 @@ WantedBy=multi-user.target
 <p>After that you will need to mount the contents of the lvm everytime you start WSL2. I could not get systemd to do that automatically.</p>
 <pre><code class="language-sh">sudo mount /dev/ubuntu-vg/ubuntu-lv /media/ubuntu
 </code></pre>
-<p>If it's not an LVM, you can just mount the drive directly. To find the UUID of the drive, run:</p>
+<h4><a href="#if-its-not-an-lvm" aria-hidden="true" class="anchor" id="if-its-not-an-lvm"></a>If it's not an LVM</h4>
+<p>You can just mount the drive directly. To find the UUID of the drive, run:</p>
 <pre><code class="language-sh">lsblk -fa
 </code></pre>
 <p>Then create a systemd service:</p>
@@ -56,10 +58,9 @@ WantedBy=multi-user.target
 </code></pre>
 <p>More on how to mount using systemd <a href="https://manpages.debian.org/testing/systemd/systemd.mount.5.en.html">here</a>.</p>
 <p><strong>Note:</strong> At the time of this writing WSL2 does not mount btrfs with <code>discard=async</code>. So make sure fstrim.timer is enabled and running when you boot into linux to make sure the filesystem is trimmed.</p>
-<p>More details on trimming, including for external SSDs, see <a href="https://wiki.archlinux.org/title/Solid_state_drive">here</a></p>
+<p>More details on trimming, including for external SSDs, see the excellent archlinux documentation <a href="https://wiki.archlinux.org/title/Solid_state_drive">here</a>.</p>
 <h3><a href="#all-set" aria-hidden="true" class="anchor" id="all-set"></a>All Set</h3>
 <p>Now you can start WSL2 and access your Linux drive from Windows.
-And the same workspace is available in both environments!
-I personally use VSCode for this.</p>
+And the same workspace is available in both environments!</p>
 <p>Happy coding!</p>
 ]]></content:encoded></item></channel></rss>

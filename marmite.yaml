@@ -1,12 +1,13 @@
 name: Saurabh Rawat
-tagline: Saurabh Rawat's blog, likely helpful.
+tagline: Saurabh Rawat's blog, considered helpful.
 url: https://eklavya.github.io/blog
 menu:
   - ["About", "about.html"]
   - ["Tags", "tags.html"]
 
 pagination: 10
-
+enable_search: true
+search_title: Search Posts
 extra:
   colorscheme: clean
 
